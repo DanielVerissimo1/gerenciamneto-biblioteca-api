@@ -1,10 +1,15 @@
-# gerenciamneto-biblioteca-api
+<div >
+  
+# Api Para Gerenciamento de bibliotecas
 
-![GitHub repo size](https://img.shields.io/github/repo-size/DanielVerissimo1/gerenciamneto-biblioteca-api?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/DanielVerissimo1/gerenciamneto-biblioteca-api?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/DanielVerissimo1/gerenciamneto-biblioteca-api?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/DanielVerissimo1/gerenciamneto-biblioteca-api?style=for-the-badge)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/DanielVerissimo1/gerenciamneto-biblioteca-api?style=for-the-badge)
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express">
+  <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
+  <img src="https://img.shields.io/badge/Knex-FF6600?style=for-the-badge" alt="Knex">
+  <img src="https://img.shields.io/badge/Zod-3068B7?style=for-the-badge" alt="Zod">
+  <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger">
+</div>
 
 > API REST para gerenciamento de uma biblioteca. Permite cadastrar, listar, atualizar e remover livros, alem de registrar emprestimos e devolucoes. Construida com Node.js, Express, TypeScript, SQLite, Knex, Zod e documentacao Swagger.
 
@@ -168,37 +173,6 @@ http://localhost:3000/api-docs
 | Validar dados | Usa Zod para validar body, params e query |
 | Documentar API | Usa Swagger para documentacao interativa |
 | Persistir dados | Usa SQLite com Knex Query Builder |
-
----
-
-## Tecnologias Utilizadas
-
-<div align="center">
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express">
-  <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
-  <img src="https://img.shields.io/badge/Knex-FF6600?style=for-the-badge" alt="Knex">
-  <img src="https://img.shields.io/badge/Zod-3068B7?style=for-the-badge" alt="Zod">
-  <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger">
-</div>
-
----
-
-## Conceitos Aplicados
-
-- API REST com Express
-- TypeScript com tipagem estatica
-- Controllers com classes
-- Rotas separadas por recurso
-- Middleware unico para tratamento de erros
-- Validacao de dados com Zod
-- Persistencia com SQLite
-- Query Builder com Knex
-- Migrations simples executadas ao iniciar o servidor
-- Documentacao interativa com Swagger
-- CORS habilitado
-- Separacao entre app, server, routes, controllers, data, docs, middlewares e utils
 
 ---
 

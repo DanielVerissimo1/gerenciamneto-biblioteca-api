@@ -1,7 +1,7 @@
 import { app } from "./app";
 import { runMigrations } from "./data/migrations";
 
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = 3000;
 
 async function startServer() {
   await runMigrations();

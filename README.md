@@ -1,21 +1,111 @@
-<div >
-  
-# Api Para Gerenciamento de bibliotecas
+﻿<div align="center">
 
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express">
-  <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
-  <img src="https://img.shields.io/badge/Knex-FF6600?style=for-the-badge" alt="Knex">
-  <img src="https://img.shields.io/badge/Zod-3068B7?style=for-the-badge" alt="Zod">
-  <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger">
+# API Para Gerenciamento de Biblioteca
+
+  <p>
+    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+    <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express">
+    <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
+    <img src="https://img.shields.io/badge/Knex-FF6600?style=for-the-badge" alt="Knex">
+    <img src="https://img.shields.io/badge/Zod-3068B7?style=for-the-badge" alt="Zod">
+    <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger">
+  </p>
 </div>
 
-> API REST para gerenciamento de uma biblioteca. Permite cadastrar, listar, atualizar e remover livros, alem de registrar emprestimos e devolucoes. Construida com Node.js, Express, TypeScript, SQLite, Knex, Zod e documentacao Swagger.
+**API Para Gerenciamento de Biblioteca** é o **back-end** de um projeto **fullstack** para controle de acervo e empréstimos. A API foi construída com **Node.js**, **Express**, **TypeScript**, **SQLite**, **Knex**, **Zod** e **Swagger**, fornecendo as rotas consumidas pelo front-end React do sistema.
+
+Ela permite cadastrar, listar, buscar, atualizar e remover livros, além de registrar empréstimos, controlar devoluções e manter a disponibilidade dos livros no banco de dados local.
 
 ---
 
-## Rotas da Aplicacao
+## Projeto Fullstack
+
+Este repositório faz parte de um sistema dividido em duas aplicações:
+
+| Camada | Repositório | Responsabilidade |
+|--------|-------------|------------------|
+| **Back-end / API** | [gerenciamneto-biblioteca-api](https://github.com/DanielVerissimo1/gerenciamneto-biblioteca-api) | Regras de negócio, rotas REST, validação, SQLite e Swagger |
+| **Front-end** | [gerenciamento-biblioteca-front-end](https://github.com/DanielVerissimo1/gerenciamento-biblioteca-front-end) | Interface web para dashboard, livros, empréstimos e devoluções |
+
+O fluxo entre os projetos funciona assim:
+
+```mermaid
+graph LR
+    A[Usuário] --> B[Front-end React]
+    B --> C[API REST local]
+    C --> D[SQLite]
+    C --> E[Swagger /api-docs]
+```
+
+Para usar o sistema completo, esta API deve estar em execução localmente em `http://localhost:3000`, que é a URL consumida pelo front-end.
+
+---
+
+## Funcionalidades
+
+| Funcionalidade | Descrição |
+|----------------|-----------|
+| **Cadastrar livro** | Cria livros com título, autor, gênero e disponibilidade inicial |
+| **Listar livros** | Retorna todos os livros cadastrados no acervo |
+| **Filtrar por gênero** | Lista livros por gênero usando query parameter |
+| **Buscar livro por ID** | Retorna os dados de um livro específico |
+| **Atualizar livro** | Altera título, autor ou gênero de um livro existente |
+| **Remover livro** | Remove livros sem empréstimo ativo |
+| **Criar empréstimo** | Registra empréstimo de um livro disponível para um aluno |
+| **Listar empréstimos ativos** | Retorna os empréstimos que ainda não foram devolvidos |
+| **Devolver livro** | Marca o empréstimo como devolvido e libera o livro novamente |
+| **Validar dados** | Usa Zod para validar body, params e query |
+| **Persistir dados** | Usa SQLite com Knex Query Builder |
+| **Documentar API** | Expõe documentação interativa com Swagger em `/api-docs` |
+
+---
+
+## Como Rodar o Projeto
+
+```bash
+# Clonar o repositório
+git clone https://github.com/DanielVerissimo1/gerenciamneto-biblioteca-api
+
+# Entrar na pasta do projeto
+cd gerenciamneto-biblioteca-api
+
+# Instalar dependências
+npm install
+
+# Iniciar em modo desenvolvimento
+npm run dev
+```
+
+O servidor ficará disponível em:
+
+```text
+http://localhost:3000
+```
+
+A documentação Swagger ficará disponível em:
+
+```text
+http://localhost:3000/api-docs
+```
+
+---
+
+## Integração com o Front-end
+
+Esta API é consumida pelo repositório [DanielVerissimo1/gerenciamento-biblioteca-front-end](https://github.com/DanielVerissimo1/gerenciamento-biblioteca-front-end).
+
+No front-end, a URL da API está configurada localmente em `src/services/api.ts`:
+
+```ts
+export const API_BASE_URL = "http://localhost:3000";
+```
+
+Por isso, para usar a aplicação completa, rode primeiro esta API e depois inicie o front-end.
+
+---
+
+## Rotas da Aplicação
 
 ### `/livros`
 
@@ -43,7 +133,7 @@ Retorna todos os livros cadastrados.
 
 **Query Parameters:**
 
-- `genero` opcional: filtra os livros por genero.
+- `genero` opcional: filtra os livros por gênero.
 
 **Exemplo:**
 
@@ -56,9 +146,9 @@ GET /livros?genero=Fantasia
 <details>
 <summary>GET <code>/livros/:id</code> - Buscar livro por ID</summary>
 
-Retorna os dados de um livro especifico.
+Retorna os dados de um livro específico.
 
-**Parametros de rota:**
+**Parâmetros de rota:**
 
 - `id`: ID do livro.
 
@@ -67,9 +157,9 @@ Retorna os dados de um livro especifico.
 <details>
 <summary>PATCH <code>/livros/:id</code> - Atualizar livro</summary>
 
-Atualiza as informacoes de um livro existente.
+Atualiza as informações de um livro existente.
 
-**Parametros de rota:**
+**Parâmetros de rota:**
 
 - `id`: ID do livro.
 
@@ -83,7 +173,7 @@ Atualiza as informacoes de um livro existente.
 }
 ```
 
-> Todos os campos sao opcionais, mas pelo menos um campo deve ser enviado.
+> Todos os campos são opcionais, mas pelo menos um campo deve ser enviado.
 
 </details>
 
@@ -92,20 +182,20 @@ Atualiza as informacoes de um livro existente.
 
 Remove um livro do acervo.
 
-**Parametros de rota:**
+**Parâmetros de rota:**
 
 - `id`: ID do livro.
 
-> Um livro com emprestimo ativo nao pode ser removido.
+> Um livro com empréstimo ativo não pode ser removido.
 
 </details>
 
 ### `/emprestimos`
 
 <details>
-<summary>POST <code>/emprestimos</code> - Criar emprestimo</summary>
+<summary>POST <code>/emprestimos</code> - Criar empréstimo</summary>
 
-Registra um novo emprestimo para um livro disponivel.
+Registra um novo empréstimo para um livro disponível.
 
 **Body (JSON):**
 
@@ -116,36 +206,36 @@ Registra um novo emprestimo para um livro disponivel.
 }
 ```
 
-> Ao criar um emprestimo, o livro fica indisponivel.
+> Ao criar um empréstimo, o livro fica indisponível.
 
 </details>
 
 <details>
-<summary>GET <code>/emprestimos</code> - Listar emprestimos ativos</summary>
+<summary>GET <code>/emprestimos</code> - Listar empréstimos ativos</summary>
 
-Retorna todos os emprestimos que ainda nao foram devolvidos.
+Retorna todos os empréstimos que ainda não foram devolvidos.
 
 </details>
 
 <details>
 <summary>PATCH <code>/emprestimos/:id/devolver</code> - Devolver livro</summary>
 
-Marca um emprestimo como devolvido.
+Marca um empréstimo como devolvido.
 
-**Parametros de rota:**
+**Parâmetros de rota:**
 
-- `id`: ID do emprestimo.
+- `id`: ID do empréstimo.
 
-> Ao devolver um emprestimo, o livro volta a ficar disponivel.
+> Ao devolver um empréstimo, o livro volta a ficar disponível.
 
 </details>
 
 ### `/api-docs`
 
 <details>
-<summary>GET <code>/api-docs</code> - Documentacao Swagger</summary>
+<summary>GET <code>/api-docs</code> - Documentação Swagger</summary>
 
-Abre a documentacao interativa da API.
+Abre a documentação interativa da API.
 
 **URL local:**
 
@@ -157,88 +247,29 @@ http://localhost:3000/api-docs
 
 ---
 
-## Funcionalidades
-
-| Funcionalidade | Descricao |
-| --- | --- |
-| Cadastrar livro | Cria livros com titulo, autor e genero |
-| Listar livros | Retorna todos os livros cadastrados |
-| Filtrar por genero | Filtra livros usando query parameter |
-| Buscar por ID | Retorna um livro especifico |
-| Atualizar livro | Altera dados de um livro existente |
-| Remover livro | Remove livros sem emprestimo ativo |
-| Criar emprestimo | Registra emprestimo de livro disponivel |
-| Listar emprestimos ativos | Mostra apenas emprestimos nao devolvidos |
-| Devolver livro | Marca emprestimo como devolvido e libera o livro |
-| Validar dados | Usa Zod para validar body, params e query |
-| Documentar API | Usa Swagger para documentacao interativa |
-| Persistir dados | Usa SQLite com Knex Query Builder |
-
----
-
-## Como Rodar o Projeto
-
-```bash
-# Clonar o repositorio
-git clone https://github.com/DanielVerissimo1/gerenciamneto-biblioteca-api
-
-# Entrar na pasta do projeto
-cd gerenciamneto-biblioteca-api
-
-# Instalar dependencias
-npm install
-
-# Iniciar em modo desenvolvimento
-npm run dev
-```
-
-O servidor estara disponivel em:
-
-```text
-http://localhost:3000
-```
-
-A documentacao Swagger estara disponivel em:
-
-```text
-http://localhost:3000/api-docs
-```
-
----
-
-## Scripts Disponiveis
-
-| Script | Descricao |
-| --- | --- |
-| `npm run dev` | Inicia o servidor em desenvolvimento com `ts-node-dev` |
-| `npm run build` | Compila o projeto TypeScript para a pasta `dist` |
-| `npm start` | Executa a versao compilada em `dist/server.js` |
-
----
-
 ## Banco de Dados
 
-O projeto usa SQLite. O arquivo do banco e criado automaticamente em:
+O projeto usa SQLite. O arquivo do banco é criado automaticamente em:
 
 ```text
 data/biblioteca.sqlite
 ```
 
-As tabelas tambem sao criadas automaticamente ao iniciar o servidor:
+As tabelas também são criadas automaticamente ao iniciar o servidor:
 
 - `livros`
 - `emprestimos`
 
 ---
 
-## Fluxo da Aplicacao
+## Fluxo da API
 
 ```mermaid
 graph TD
-    A[Requisicao HTTP] --> B[Express App]
+    A[Requisição HTTP] --> B[Express App]
     B --> C[Routes]
     C --> D[Controller]
-    D --> E[Validacao com Zod]
+    D --> E[Validação com Zod]
     E --> F[Knex Query Builder]
     F --> G[SQLite]
     G --> H[Resposta HTTP]
@@ -251,47 +282,26 @@ graph TD
 
 ## Arquitetura do Projeto
 
-```text
-gerenciamneto-biblioteca-api/
-|
-|-- data/
-|   |-- biblioteca.sqlite
-|
-|-- src/
-|   |-- controllers/
-|   |   |-- emprestimos.controller.ts
-|   |   |-- livros.controller.ts
-|   |
-|   |-- data/
-|   |   |-- database.ts
-|   |   |-- migrations/
-|   |       |-- 001_create_livros.ts
-|   |       |-- 002_create_emprestimos.ts
-|   |       |-- index.ts
-|   |
-|   |-- docs/
-|   |   |-- swagger.ts
-|   |
-|   |-- middlewares/
-|   |   |-- error-handling.ts
-|   |
-|   |-- routes/
-|   |   |-- emprestimos.routes.ts
-|   |   |-- index.ts
-|   |   |-- livros.routes.ts
-|   |
-|   |-- utils/
-|   |   |-- AppError.ts
-|   |
-|   |-- app.ts
-|   |-- server.ts
-|
-|-- .gitignore
-|-- package.json
-|-- package-lock.json
-|-- README.md
-|-- tsconfig.json
-```
+O projeto é organizado em camadas simples para separar rotas, regras de negócio, banco de dados e tratamento de erros:
+
+| Pasta | Responsabilidade |
+|-------|------------------|
+| `src/controllers` | Regras de cada recurso e respostas HTTP |
+| `src/routes` | Definição das rotas da API |
+| `src/data` | Conexão com SQLite e migrations |
+| `src/docs` | Configuração da documentação Swagger |
+| `src/middlewares` | Tratamento centralizado de erros |
+| `src/utils` | Utilitários como `AppError` |
+
+---
+
+## Scripts Disponíveis
+
+| Script | Descrição |
+|--------|-----------|
+| `npm run dev` | Inicia o servidor em desenvolvimento com `ts-node-dev` |
+| `npm run build` | Compila o projeto TypeScript para a pasta `dist` |
+| `npm start` | Executa a versão compilada em `dist/server.js` |
 
 ---
 

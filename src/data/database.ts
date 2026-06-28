@@ -1,7 +1,10 @@
+import fs from "fs";
 import path from "path";
 import setupKnex, { Knex } from "knex";
 
 const databasePath = path.resolve(__dirname, "../../data/biblioteca.sqlite");
+
+fs.mkdirSync(path.dirname(databasePath), { recursive: true });
 
 export const knex: Knex = setupKnex({
   client: "sqlite3",

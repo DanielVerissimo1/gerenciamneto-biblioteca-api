@@ -3,7 +3,7 @@ import { runMigrations } from "../migrations";
 
 const livros = [
   {
-    titulo: "Como Enganar o Diabo",
+    titulo: "Mais Esperto que o Diabo",
     autor: "Napoleon Hill",
     genero: "Desenvolvimento pessoal",
   },

@@ -73,9 +73,16 @@ cd gerenciamneto-biblioteca-api
 # Instalar dependências
 npm install
 
+# Criar o banco e inserir os dados iniciais
+npm run seed
+
 # Iniciar em modo desenvolvimento
 npm run dev
 ```
+
+O comando `npm run seed` deve ser executado uma vez após clonar o projeto. Ele cria
+as tabelas e cadastra os livros e empréstimos iniciais. O seed é idempotente, então
+pode ser executado novamente sem duplicar os registros.
 
 O servidor ficará disponível em:
 
@@ -259,6 +266,25 @@ As tabelas também são criadas automaticamente ao iniciar o servidor:
 
 - `livros`
 - `emprestimos`
+
+## Dados Iniciais
+
+Para preencher o banco com os dados iniciais, execute:
+
+```bash
+npm run seed
+```
+
+O seed cadastra os seguintes livros e empréstimos ativos:
+
+| Aluno | Livro |
+|-------|-------|
+| Dandan | Como Enganar o Diabo |
+| Iris | Nada Pode Me Ferir |
+| Davi | O Homem Mais Rico da Babilônia |
+| Arthur | O Cortiço |
+
+O livro `Dom Casmurro` também é cadastrado e permanece disponível.
 
 ---
 
